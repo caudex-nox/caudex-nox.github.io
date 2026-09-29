@@ -8,11 +8,11 @@
 
 ###### Growing roots for future software.
 
-Bienvenido al repositorio del sitio web oficial de **[Caudex]**.
+Bienvenido al repositorio del sitio web oficial de **Caudex**.
 
 En este espacio recopilamos y presentamos los proyectos, desarrollos y herramientas en los que trabajamos como equipo.
 
-🔗 **Visita nuestro sitio:** [caudex.github.io](https://caudex.github.io)
+🔗 **Visita nuestro sitio:** [caudex-nox.github.io](https://caudex-nox.github.io)
 
 ---
 
@@ -22,4 +22,4 @@ En este espacio recopilamos y presentamos los proyectos, desarrollos y herramien
 * JavaScript
 
 ---
-*Mantenido por el equipo de [Caudex].*
+*Mantenido por el equipo de Caudex.*
