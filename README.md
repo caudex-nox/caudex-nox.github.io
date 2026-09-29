@@ -6,7 +6,9 @@
   </picture>
 </p>
 
-###### Growing roots for future software.
+<h6 align="center">Growing roots for future software.</h6>
+
+<br>
 
 Bienvenido al repositorio del sitio web oficial de **Caudex**.
 
