@@ -1,0 +1,54 @@
+---
+---
+
+<main class="hero">
+	<div class="badge">
+		<span class="dot"></span> INGENIERÍA DE SOFTWARE & SOLUCIONES
+	</div>
+
+	<img src="/assets/img/caudex-dark.svg" alt="Caudex Hero Logo" class="hero-logo" width="110" height="110" />
+
+	<h1 class="hero-title">
+		Growing roots for <br />
+		<span class="highlight">future software.</span>
+	</h1>
+
+	<p class="hero-subtitle">
+		Desarrollo full-stack moderno, arquitecturas escalables y soluciones digitales modulares.<br />
+		Construyendo tecnología robusta desde las bases, pensada para instituciones y empresas.
+	</p>
+
+	<div class="hero-buttons">
+		<button class="btn-primary">Explorar Kanon &rarr;</button>
+		<button class="btn-secondary">Ver en GitHub</button>
+	</div>
+
+	<div class="tech-stack">
+		<h3 class="tech-title">TECNOLOGÍAS DE BASE</h3>
+		<p class="tech-list">React &middot; Node.js &middot; TypeScript &middot; Express &middot; PostgreSQL &middot; Prisma &middot; C/C++</p>
+	</div>
+</main>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		// Seleccionamos los elementos principales dentro del hero
+		const heroElements = document.querySelectorAll<HTMLElement>('.hero > *');
+
+		// Configuramos el estado inicial invisible
+		heroElements.forEach((el, index) => {
+			el.style.opacity = '0';
+			el.style.transform = 'translateY(20px)';
+
+			// Asignamos una transición escalonada (delay basado en el índice)
+			el.style.transition = `opacity 0.7s ease ${index * 0.15}s, transform 0.7s ease ${index * 0.15}s`;
+		});
+
+		// Desatamos la animación un instante después de cargar
+		setTimeout(() => {
+			heroElements.forEach((el) => {
+				el.style.opacity = '1';
+				el.style.transform = 'translateY(0)';
+			});
+		}, 100);
+	});
+</script>
