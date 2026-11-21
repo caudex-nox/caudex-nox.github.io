@@ -1,11 +1,83 @@
 :root {
-    --bg-color: #121212; /* Fondo oscuro */
+    /* Por defecto: Dark Mode */
+    --bg-color: #121212;
     --text-main: #ffffff;
-    --text-muted: #a1a1aa; /* Gris claro para subtítulos */
-    --text-dark-gray: #52525b; /* Gris oscuro para títulos pequeños */
-    --accent-color: #c4b59d; /* Color beige/dorado del texto y botones */
+    --text-muted: #a1a1aa;
+    --text-dark-gray: #52525b;
+    --accent-color: #c4b59d;
     --accent-hover: #b3a48c;
-    --glow-color: rgba(196, 181, 157, 0.06); /* Color del halo central */
+    --glow-color: rgba(196, 181, 157, 0.06);
+    --btn-contact-bg: #c4b59d;
+    --btn-contact-text: #121212;
+    --btn-contact-hover: #b3a48c;
+    --btn-secondary-border: rgba(255, 255, 255, 0.15);
+    --btn-secondary-color: #ffffff;
+    --btn-secondary-hover-bg: rgba(255, 255, 255, 0.05);
+    --btn-secondary-hover-border: rgba(255, 255, 255, 0.3);
+    --badge-border: rgba(196, 181, 157, 0.2);
+    --badge-bg: rgba(196, 181, 157, 0.03);
+    --badge-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --toggle-color: #a1a1aa;
+    --toggle-hover-color: #ffffff;
+    --toggle-hover-bg: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] {
+    /* Light Mode */
+    --bg-color: #f7f6f3;
+    --text-main: #191919;
+    --text-muted: #6b6b76;
+    --text-dark-gray: #8c8c96;
+    --accent-color: #8f816c;
+    --accent-hover: #786c5a;
+    --glow-color: rgba(143, 129, 108, 0.1);
+    --btn-contact-bg: #191919;
+    --btn-contact-text: #ffffff;
+    --btn-contact-hover: #333333;
+    --btn-secondary-border: rgba(25, 25, 25, 0.18);
+    --btn-secondary-color: #191919;
+    --btn-secondary-hover-bg: rgba(25, 25, 25, 0.04);
+    --btn-secondary-hover-border: rgba(25, 25, 25, 0.35);
+    --badge-border: rgba(143, 129, 108, 0.3);
+    --badge-bg: rgba(143, 129, 108, 0.06);
+    --badge-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    --toggle-color: #6b6b76;
+    --toggle-hover-color: #191919;
+    --toggle-hover-bg: rgba(25, 25, 25, 0.06);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode explícito */
+    --bg-color: #121212;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+    --text-dark-gray: #52525b;
+    --accent-color: #c4b59d;
+    --accent-hover: #b3a48c;
+    --glow-color: rgba(196, 181, 157, 0.06);
+    --btn-contact-bg: #c4b59d;
+    --btn-contact-text: #121212;
+    --btn-contact-hover: #b3a48c;
+    --btn-secondary-border: rgba(255, 255, 255, 0.15);
+    --btn-secondary-color: #ffffff;
+    --btn-secondary-hover-bg: rgba(255, 255, 255, 0.05);
+    --btn-secondary-hover-border: rgba(255, 255, 255, 0.3);
+    --badge-border: rgba(196, 181, 157, 0.2);
+    --badge-bg: rgba(196, 181, 157, 0.03);
+    --badge-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --toggle-color: #a1a1aa;
+    --toggle-hover-color: #ffffff;
+    --toggle-hover-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* Manejo de elementos según el tema */
+html[data-theme="light"] .dark-only {
+    display: none !important;
+}
+
+html[data-theme="dark"] .light-only,
+html:not([data-theme="light"]) .light-only {
+    display: none !important;
 }
 
 * {
@@ -23,6 +95,7 @@ body {
     flex-direction: column;
     overflow-x: hidden;
     position: relative;
+    transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Efecto de brillo detrás del logo central */
@@ -36,6 +109,7 @@ body {
     background: radial-gradient(circle, var(--glow-color) 0%, rgba(18,18,18,0) 50%);
     z-index: -1;
     pointer-events: none;
+    transition: background 0.3s ease;
 }
 
 /* --- Navegación --- */
@@ -49,18 +123,21 @@ body {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 }
 
-.nav-logo {
-    height: 36px;
+.nav-tree-logo {
+    height: 38px;
     width: auto;
+    display: block;
+    object-fit: contain;
 }
 
-.brand-name {
-    font-size: 1.25rem;
-    font-weight: 800;
-    letter-spacing: 1.5px;
+.nav-letters-logo {
+    height: 18px;
+    width: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .nav-links {
@@ -81,20 +158,51 @@ body {
     color: var(--text-main);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.theme-toggle-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--toggle-color);
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    color: var(--toggle-hover-color);
+    background-color: var(--toggle-hover-bg);
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
 .btn-contact {
-    background-color: var(--accent-color);
-    color: #121212;
+    background-color: var(--btn-contact-bg);
+    color: var(--btn-contact-text);
     border: none;
     padding: 10px 24px;
     border-radius: 6px;
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn-contact:hover {
-    background-color: var(--accent-hover);
+    background-color: var(--btn-contact-hover);
 }
 
 /* --- Hero Section --- */
@@ -108,21 +216,21 @@ body {
     padding: 40px 20px;
 }
 
-/* BADGE CORREGIDO: Bordes redondeados, sutil y limpio */
 .badge {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 8px 20px;
-    border: 1px solid rgba(196, 181, 157, 0.2);
+    border: 1px solid var(--badge-border);
     border-radius: 999px;
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 1.5px;
     color: var(--accent-color);
     margin-bottom: 50px;
-    background: rgba(196, 181, 157, 0.03); /* Fondo casi transparente */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: var(--badge-bg);
+    box-shadow: var(--badge-shadow);
+    transition: border-color 0.25s, color 0.25s, background-color 0.25s;
 }
 
 .badge .dot {
@@ -130,11 +238,20 @@ body {
     height: 6px;
     background-color: var(--accent-color);
     border-radius: 50%;
+    transition: background-color 0.25s;
+}
+
+.hero-logo-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
 }
 
 .hero-logo {
     height: 110px;
-    margin-bottom: 24px;
+    width: auto;
+    display: block;
 }
 
 .hero-title {
@@ -147,6 +264,7 @@ body {
 
 .hero-title .highlight {
     color: var(--accent-color);
+    transition: color 0.25s;
 }
 
 .hero-subtitle {
@@ -155,6 +273,7 @@ body {
     line-height: 1.6;
     max-width: 750px;
     margin-bottom: 48px;
+    transition: color 0.25s;
 }
 
 .hero-buttons {
@@ -164,8 +283,8 @@ body {
 }
 
 .btn-primary {
-    background-color: var(--accent-color);
-    color: #121212;
+    background-color: var(--btn-contact-bg);
+    color: var(--btn-contact-text);
     border: none;
     padding: 14px 28px;
     border-radius: 8px;
@@ -176,25 +295,25 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: var(--accent-hover);
+    background-color: var(--btn-contact-hover);
     transform: translateY(-2px);
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--text-main);
-    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--btn-secondary-color);
+    border: 1px solid var(--btn-secondary-border);
     padding: 14px 28px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(255,255,255,0.05);
-    border-color: rgba(255,255,255,0.3);
+    background-color: var(--btn-secondary-hover-bg);
+    border-color: var(--btn-secondary-hover-border);
     transform: translateY(-2px);
 }
 
@@ -210,10 +329,38 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 2px;
+    transition: color 0.25s;
 }
 
 .tech-list {
     color: var(--text-muted);
     font-size: 0.95rem;
     word-spacing: 3px;
+    transition: color 0.25s;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+    }
 }
